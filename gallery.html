@@ -3,7 +3,7 @@
 <head>
     <title>Gallery - Your Name</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -139,36 +139,44 @@ $(document).ready(function(){
     $('.slider-for').html(htmlFor);
     $('.slider-nav').html(htmlNav);
 
+    // Generate the HTML
+    var htmlFor = '';
+    var htmlNav = '';
+    for (var i = 0; i < images.length; i++) {
+        htmlFor += '<div class="item"><img src="' + images[i] + '" alt="Artwork ' + (i+1) + '"></div>';
+        htmlNav += '<div class="item"><img src="' + images[i] + '" alt="Artwork ' + (i+1) + '"></div>';
+    }
+
+    // Add the HTML to the .slider-for and .slider-nav div
+    $('.slider-for').html(htmlFor);
+    $('.slider-nav').html(htmlNav);
+
     // Initialize Owl Carousels
-    var sync1 = $(".slider-for");
-    var sync2 = $(".slider-nav");
     var syncedSecondary = true;
 
-    // Initialize Owl Carousels
-var sync1 = $(".slider-for");
-var sync2 = $(".slider-nav");
+    var sync2 = $(".slider-nav");
+    sync2.owlCarousel({
+        items : 3,
+        dots: true,
+        nav: true,
+        smartSpeed: 200,
+        slideSpeed: 500,
+        slideBy: 3, 
+        responsiveRefreshRate: 100,
+        navText: ["<", ">"],
+    }).on('changed.owl.carousel', syncPosition2);
 
-	sync1.owlCarousel({
-    items: 1,
-    slideSpeed: 2000,
-    nav: true,
-    autoplay: true,
-    dots: true,
-    loop: true,
-    responsiveRefreshRate: 200,
-    navText: ["<", ">"],
-}).on('changed.owl.carousel', syncPosition);
-
-	sync2.owlCarousel({
-    items : 3,
-    dots: true,
-    nav: true,
-    smartSpeed: 200,
-    slideSpeed: 500,
-    slideBy: 3, 
-    responsiveRefreshRate: 100,
-    navText: ["<", ">"],
-}).on('changed.owl.carousel', syncPosition2);
+    var sync1 = $(".slider-for");
+    sync1.owlCarousel({
+        items: 1,
+        slideSpeed: 2000,
+        nav: true,
+        autoplay: true,
+        dots: true,
+        loop: true,
+        responsiveRefreshRate: 200,
+        navText: ["<", ">"],
+    }).on('changed.owl.carousel', syncPosition);
 
 
     function syncPosition(el) {
