@@ -130,18 +130,6 @@ $(document).ready(function(){
     // Array of image filenames
     var images = ['Gallery/artwork1.jpeg', 'Gallery/artwork2.jpeg', 'Gallery/artwork3.jpeg', 'Gallery/artwork4.jpeg', 'Gallery/artwork5.jpeg', 'Gallery/artwork6.jpeg', 'Gallery/artwork7.jpeg', 'Gallery/artwork8.jpeg', 'Gallery/artwork9.jpeg', 'Gallery/artwork10.jpeg', 'Gallery/artwork11.jpeg', 'Gallery/artwork12.jpeg', 'Gallery/artwork13.jpeg', 'Gallery/artwork14.jpeg', 'Gallery/artwork15.jpeg', 'Gallery/artwork16.jpeg', 'Gallery/artwork17.jpeg','Gallery/artwork18.jpeg', 'Gallery/artwork19.jpeg', 'Gallery/artwork20.jpeg', /* add more filenames as needed */];
 
-	// Generate the HTML
-    var htmlFor = '';
-    var htmlNav = '';
-    for (var i = 0; i < images.length; i++) {
-        htmlFor += '<div class="item"><img src="' + images[i] + '" alt="Artwork ' + (i+1) + '"></div>';
-        htmlNav += '<div class="item"><img src="' + images[i] + '" alt="Artwork ' + (i+1) + '"></div>';
-    }
-
-    // Add the HTML to the .slider-for and .slider-nav div
-    $('.slider-for').html(htmlFor);
-    $('.slider-nav').html(htmlNav);
-
     // Generate the HTML
     var htmlFor = '';
     var htmlNav = '';
