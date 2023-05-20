@@ -1,90 +1,157 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery - Your Name</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <title>Caterina's Gallery - Oil Paintings</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            margin: 0;
-            background: linear-gradient(to bottom, #ffffff 0%,#e6e6e6 100%);
-        }
-        header, footer {
-            background-color: #333;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px 0;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-        }
-        nav ul li {
-            display: inline-block;
-            margin: 0 10px;
-        }
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-        main {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            display: block;
-        }
-        .slider-nav {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .slider-for img, .slider-nav img {
-            max-width: 100%;
-            max-height: 500px;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-        .slider-wrap {
-            max-width: 100%;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .owl-theme .owl-nav {
-            text-align: center;
-        }
-        .owl-theme .owl-nav [class*=owl-] {
-            color: #FFF;
-            font-size: 14px;
-            margin: 5px;
-            padding: 4px 7px;
-            background: #d6d6d6;
-            display: inline-block;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-        .owl-theme .owl-nav [class*=owl-]:hover {
-            background: #869791;
-            color: #FFF;
-            text-decoration: none;
-        }
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+}
+
+header, footer {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+}
+
+/* Gallery styles */
+
+.thumb-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 50%;
+    margin: 20px auto;
+}
+
+.thumb-slider .thumbs {
+    display: flex;
+    overflow: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;  /* smooth scrolling */
+    scrollbar-width: none; /* hide scrollbar for Firefox */
+    -ms-overflow-style: none;  /* hide scrollbar for IE and Edge */
+}
+
+.thumb-slider .thumbs::-webkit-scrollbar {
+    display: none; /* hide scrollbar for Chrome, Safari and Opera */
+}
+
+.thumb-slider .thumbs img {
+    flex: 0 0 auto;  /* This makes the thumbnails keep their natural width */
+    width: 100px;  /* Or whatever size you want the thumbnails to be */
+    height: auto;
+    margin-right: 10px;  /* Add some spacing between thumbnails */
+    opacity: 0.5;  /* Inactive thumbnails */
+}
+
+.thumb-slider .thumbs img.current {
+    opacity: 0.7;  /* Currently scrolled-to thumbnail */
+}
+
+.thumb-slider .thumbs img.active {
+    opacity: 1;  /* Selected thumbnail */
+}
+
+
+
+.thumb-slider .thumb-prev, .thumb-slider .thumb-next {
+    /* Same styles as .prev and .next but with smaller dimensions */
+    cursor: pointer;
+    width: auto;
+    padding: 8px;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    user-select: none;
+    background-color: rgba(200, 200, 200, 0.7);
+}
+
+.slider {
+    position: relative;
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.slider img {
+    width: 100%;
+    height: auto;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    background-color: rgba(200, 200, 200, 0.7);
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev {
+    left: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+footer a {
+    color: #fff;  /* white text color */
+}
+
+footer a:hover {
+    color: #ddd;  /* lighter grey color on hover */
+}
+
     </style>
 </head>
 <body>
@@ -97,115 +164,92 @@
             </ul>
         </nav>
     </header>
-  <main>
-    <h1>Gallery</h1>
-    <div class="slider-wrap">
-        <div class="slider-for">
-            <!-- Main images will be added here by JavaScript -->
-        </div>
-        <div class="slider-nav">
-            <!-- Navigation images will be added here by JavaScript -->
-        </div>
-    </div>
-</main>
 
-<footer>
-    <p>© 2023 Ecaterina Timofti</p>
-</footer>
+    <main>
+        <h1>Gallery</h1>
+	  <div class="thumb-slider">
+    	  <a class="thumb-prev" onclick="plusThumbSlides(-1)">❮</a>
+   	  <div class="thumbs">
+        <!-- Thumbnails will be added dynamically -->
+  	  </div>
+        <a class="thumb-next" onclick="plusThumbSlides(1)">❯</a>
+	  </div>
 
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+        <div class="slider">
+            <img id="slider-img" src="Gallery/artwork1.jpeg" alt="Artwork 1">
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a class="next" onclick="plusSlides(1)">❯</a>
+        </div>
+    </main>
 <script>
-$(document).ready(function(){
-    var images = [];
-    for (var i = 1; i <= 20; i++) {
-        images.push('Gallery/artwork' + i + '.jpeg');
+    var slideIndex = 1;
+    var thumbSlideIndex = 1;  // Define and initialize thumbSlideIndex
+    var totalSlides = 20;
+    var slideImages = [];
+
+    // Creating an array of image names
+    for (let i = 1; i <= totalSlides; i++) {
+        slideImages.push('Gallery/artwork' + i + '.jpeg');
     }
 
-    var htmlFor = '';
-    var htmlNav = '';
-    for (var i = 0; i < images.length; i++) {
-        htmlFor += '<div class="item"><img src="' + images[i] + '" alt="Artwork ' + (i+1) + '"></div>';
-        htmlNav += '<div class="item"><img src="' + images[i] + '" alt="Artwork ' + (i+1) + '"></div>';
+    // Initialize thumbnails
+    var thumbContainer = document.querySelector('.thumb-slider .thumbs');
+    for (let i = 0; i < totalSlides; i++) {
+        var thumb = document.createElement('img');
+        thumb.src = slideImages[i];
+        thumb.onclick = function() { jumpToSlide(i + 1); };
+        thumbContainer.appendChild(thumb);
     }
 
-    $('.slider-for').html(htmlFor);
-    $('.slider-nav').html(htmlNav);
-
-    var syncedSecondary = true;
-
-    var sync2 = $(".slider-nav");
-    sync2.owlCarousel({
-        items : 3,
-        dots: true,
-        nav: true,
-        smartSpeed: 200,
-        slideSpeed: 500,
-        slideBy: 3, 
-        responsiveRefreshRate: 100,
-        navText: ["<", ">"],
-    }).on('changed.owl.carousel', syncPosition2);
-
-    var sync1 = $(".slider-for");
-    sync1.owlCarousel({
-        items: 1,
-        slideSpeed: 2000,
-        nav: true,
-        autoplay: true,
-        dots: true,
-        loop: true,
-        responsiveRefreshRate: 200,
-        navText: ["<", ">"],
-    }).on('changed.owl.carousel', syncPosition);
-
-    function syncPosition(el) {
-        var count = el.item.count-1;
-        var current = Math.round(el.item.index - (el.item.count/2) - .5);
-        
-        if(current < 0) {
-            current = count;
-        }
-        if(current > count) {
-            current = 0;
-        }
-
-        sync2
-        .find(".owl-item")
-        .removeClass("current")
-        .eq(current)
-        .addClass("current");
-        var onscreen = sync2.find('.owl-item.active').length - 1;
-        var start = sync2.find('.owl-item.active').first().index();
-        var end = sync2.find('.owl-item.active').last().index();
-
-        if (current > end) {
-            sync2.data('owl.carousel').to(current, 100, true);
-        }
-        if (current < start) {
-            sync2.data('owl.carousel').to(current - onscreen, 100, true);
+    function updateThumbnails() {
+        var thumbs = document.querySelectorAll('.thumb-slider .thumbs img');
+        for (let i = 0; i < thumbs.length; i++) {
+            thumbs[i].className = i == slideIndex - 1 ? 'active' : '';
         }
     }
 
-    function syncPosition2(el) {
-        if(syncedSecondary) {
-            var number = el.item.index;
-            sync1.data('owl.carousel').to(number, 100, true);
-        }
+    function jumpToSlide(n) {
+        slideIndex = n;
+        document.getElementById('slider-img').src = slideImages[slideIndex - 1];
+        updateThumbnails();
     }
 
-    sync1.on('change.owl.carousel', function(event) {
-        sync2.trigger('to.owl.carousel', [event.item.index, 300, true]);
-    }).on('dragged.owl.carousel', function(event) {
-        sync2.trigger('to.owl.carousel', [event.item.index, 300, true]);
+    function plusSlides(n) {
+        slideIndex += n;
+        if (slideIndex > totalSlides) { slideIndex = 1; }
+        if (slideIndex < 1) { slideIndex = totalSlides; }
+        document.getElementById('slider-img').src = slideImages[slideIndex - 1];
+        updateThumbnails();
+    }
+
+    // For thumbnail slider navigation
+function plusThumbSlides(n) {
+    thumbSlideIndex += n;
+    if (thumbSlideIndex >= totalSlides) { thumbSlideIndex = 0; }
+    if (thumbSlideIndex < 0) { thumbSlideIndex = totalSlides - 1; }
+    var thumbs = document.querySelector('.thumb-slider .thumbs');
+    thumbs.scroll({
+        left: thumbSlideIndex * (100 + 10),  /* Assume each thumbnail is 100px wide + 10px margin */
+        behavior: 'smooth'
     });
 
-    sync2.on('click', '.owl-item', function(e) {
-        e.preventDefault();
-        sync1.trigger('to.owl.carousel', [$(this).index(), 300, true]);
-    });
+    // Remove the current class from all thumbnails
+    var thumbImgs = document.querySelectorAll('.thumb-slider .thumbs img');
+    for (var i = 0; i < thumbImgs.length; i++) {
+        thumbImgs[i].classList.remove('current');
+    }
 
-});
+    // Add the current class to the thumbnail being scrolled to
+    thumbImgs[thumbSlideIndex].classList.add('current');
+}
+
+// Call plusThumbSlides(0) after thumbnails have been added to set the initial current image
+plusThumbSlides(0);
+
 </script>
-</body>
-</html>
+
+    <footer>
+    <p>© 2023 Ecaterina Timofti | SMS: <a href="sms:+4746388048">+47 463 88 048</a> | <a href="https://www.instagram.com/oslo_nails_caterina/" target="_blank">Instagram</a></p>
+	</footer>
+	
 
