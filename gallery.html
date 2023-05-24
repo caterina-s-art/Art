@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caterina's Gallery - Oil Paintings</title>
     <style>
 body {
@@ -152,7 +153,26 @@ footer a:hover {
     color: #ddd;  /* lighter grey color on hover */
 }
 
+@media (max-width: 767px) {
+  .thumb-slider {
+    width: 100%;
+  }
+  
+  .slider {
+    max-width: 100%;
+  }
+  
+  .thumb-slider .thumbs img {
+    width: 75px;
+  }
+
+footer {
+    text-align: center; 
+    flex-wrap: wrap;
+  }
+}
     </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
 </head>
 <body>
     <header>
@@ -246,6 +266,11 @@ function plusThumbSlides(n) {
 // Call plusThumbSlides(0) after thumbnails have been added to set the initial current image
 plusThumbSlides(0);
 
+// Enable touch swipe navigation
+var sliderElement = document.querySelector('.slider');
+var hammer = new Hammer(sliderElement);
+hammer.on('swiperight', function() { plusSlides(-1); });
+hammer.on('swipeleft', function() { plusSlides(1); });
 </script>
 
     <footer>
