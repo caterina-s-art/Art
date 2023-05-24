@@ -83,7 +83,7 @@ main {
 }
 
 .thumb-slider .thumbs img.current {
-    opacity: 0.7;  /* Currently scrolled-to thumbnail */
+    opacity: 0.8;  /* Currently scrolled-to thumbnail */
 }
 
 .thumb-slider .thumbs img.active {
@@ -199,89 +199,91 @@ footer {
             <a class="next" onclick="plusSlides(1)">❯</a>
         </div>
     </main>
-<script>
-    var slideIndex = 1;
-    var thumbSlideIndex = 1;  // Define and initialize thumbSlideIndex
-    var totalSlides = 20;
-    var slideImages = [];
+    <script>
+        var slideIndex = 1;
+        var thumbSlideIndex = 1;  // Define and initialize thumbSlideIndex
+        var totalSlides = 20;
+        var slideImages = [];
 
-    // Creating an array of image names
-    for (let i = 1; i <= totalSlides; i++) {
-        slideImages.push('Gallery/artwork' + i + '.jpeg');
-    }
-
-    // Initialize thumbnails
-    var thumbContainer = document.querySelector('.thumb-slider .thumbs');
-    for (let i = 0; i < totalSlides; i++) {
-        var thumb = document.createElement('img');
-        thumb.src = slideImages[i];
-        thumb.onclick = function() { jumpToSlide(i + 1); };
-        thumbContainer.appendChild(thumb);
-    }
-
-    function updateThumbnails() {
-        var thumbs = document.querySelectorAll('.thumb-slider .thumbs img');
-        for (let i = 0; i < thumbs.length; i++) {
-            thumbs[i].className = i == slideIndex - 1 ? 'active' : '';
+        // Creating an array of image names
+        for (let i = 1; i <= totalSlides; i++) {
+            slideImages.push('Gallery/artwork' + i + '.jpeg');
         }
-    }
+
+        // Initialize thumbnails
+        var thumbContainer = document.querySelector('.thumb-slider .thumbs');
+        for (let i = 0; i < totalSlides; i++) {
+            var thumb = document.createElement('img');
+            thumb.src = slideImages[i];
+            thumb.onclick = function() { jumpToSlide(i + 1); };
+            thumbContainer.appendChild(thumb);
+        }
+
+        function updateThumbnails() {
+            var thumbs = document.querySelectorAll('.thumb-slider .thumbs img');
+            for (let i = 0; i < thumbs.length; i++) {
+                thumbs[i].className = i == slideIndex - 1 ? 'active' : '';
+            }
+        }
 
         function jumpToSlide(n) {
-    slideIndex = n;
-    document.getElementById('slider-img').src = slideImages[slideIndex - 1];
-    updateThumbnails();
-    thumbSlideIndex = slideIndex - 1; // Update thumbSlideIndex
-    plusThumbSlides(0); // Call plusThumbSlides(0) to scroll to the selected thumbnail
-    
-    // Remove the current class from all thumbnails
-    var thumbImgs = document.querySelectorAll('.thumb-slider .thumbs img');
-    for (var i = 0; i < thumbImgs.length; i++) {
-        thumbImgs[i].classList.remove('current');
-    }
-    
-    // Add the current class to the selected thumbnail
-    thumbImgs[thumbSlideIndex].classList.add('current');
-}
+            slideIndex = n;
+            document.getElementById('slider-img').src = slideImages[slideIndex - 1];
+            updateThumbnails();
+            thumbSlideIndex = (slideIndex - 1) % totalSlides; // Update thumbSlideIndex
+            plusThumbSlides(0); // Call plusThumbSlides(0) to scroll to the selected thumbnail
 
+            // Remove the current class from all thumbnails
+            var thumbImgs = document.querySelectorAll('.thumb-slider .thumbs img');
+            for (var i = 0; i < thumbImgs.length; i++) {
+                thumbImgs[i].classList.remove('current');
+            }
 
-    function plusSlides(n) {
-        slideIndex += n;
-        if (slideIndex > totalSlides) { slideIndex = 1; }
-        if (slideIndex < 1) { slideIndex = totalSlides; }
-        document.getElementById('slider-img').src = slideImages[slideIndex - 1];
-        updateThumbnails();
-    }
+            // Add the current class to the selected thumbnail
+            thumbImgs[thumbSlideIndex].classList.add('current');
+        }
 
-    // For thumbnail slider navigation
-function plusThumbSlides(n) {
-    thumbSlideIndex += n;
-    if (thumbSlideIndex >= totalSlides) { thumbSlideIndex = 0; }
-    if (thumbSlideIndex < 0) { thumbSlideIndex = totalSlides - 1; }
-    var thumbs = document.querySelector('.thumb-slider .thumbs');
-    thumbs.scroll({
-        left: thumbSlideIndex * (100 + 10),  /* Assume each thumbnail is 100px wide + 10px margin */
-        behavior: 'smooth'
-    });
+        function plusSlides(n) {
+            slideIndex += n;
+            if (slideIndex > totalSlides) { slideIndex = 1; }
+            if (slideIndex < 1) { slideIndex = totalSlides; }
+            document.getElementById('slider-img').src = slideImages[slideIndex - 1];
+            updateThumbnails();
+        }
 
-    // Remove the current class from all thumbnails
-    var thumbImgs = document.querySelectorAll('.thumb-slider .thumbs img');
-    for (var i = 0; i < thumbImgs.length; i++) {
-        thumbImgs[i].classList.remove('current');
-    }
+        // For thumbnail slider navigation
+        function plusThumbSlides(n) {
+            thumbSlideIndex += n % totalSlides;
+            if (thumbSlideIndex >= totalSlides) { thumbSlideIndex = 0; }
+            if (thumbSlideIndex < 0) { thumbSlideIndex = totalSlides - 1; }
+            var thumbs = document.querySelector('.thumb-slider .thumbs');
+            var thumbImgs = document.querySelectorAll('.thumb-slider .thumbs img');
+            var thumbWidth = thumbImgs[0].offsetWidth;
+            var containerWidth = thumbs.offsetWidth;
+            var scrollLeft = thumbSlideIndex * thumbWidth - (containerWidth / 2 - thumbWidth / 2);
+            thumbs.scroll({
+                left: scrollLeft,
+                behavior: 'smooth'
+            });
 
-    // Add the current class to the thumbnail being scrolled to
-    thumbImgs[thumbSlideIndex].classList.add('current');
-}
+            // Remove the current class from all thumbnails
+            for (var i = 0; i < thumbImgs.length; i++) {
+                thumbImgs[i].classList.remove('current');
+            }
 
-// Call plusThumbSlides(0) after thumbnails have been added to set the initial current image
-plusThumbSlides(0);
+            // Add the current class to the thumbnail being scrolled to
+            thumbImgs[thumbSlideIndex].classList.add('current');
+        }
 
-// Enable touch swipe navigation
-var sliderElement = document.querySelector('.slider');
-var hammer = new Hammer(sliderElement);
-hammer.on('swiperight', function() { plusSlides(-1); });
-hammer.on('swipeleft', function() { plusSlides(1); });
-</script>
+        // Call plusThumbSlides(0) after thumbnails have been added to set the initial current image
+        plusThumbSlides(0);
+
+        // Enable touch swipe navigation
+        var sliderElement = document.querySelector('.slider');
+        var hammer = new Hammer(sliderElement);
+        hammer.on('swiperight', function() { plusSlides(-1); });
+        hammer.on('swipeleft', function() { plusSlides(1); });
+    </script>
     <footer>
     <p>© 2023 Ecaterina Timofti | SMS: <a href="sms:+4746388048">+47 463 88 048</a> | <a href="https://www.instagram.com/oslo_nails_caterina/" target="_blank">Instagram</a></p>
 	</footer>
