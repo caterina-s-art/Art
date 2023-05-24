@@ -90,8 +90,6 @@ main {
     opacity: 1;  /* Selected thumbnail */
 }
 
-
-
 .thumb-slider .thumb-prev, .thumb-slider .thumb-next {
     /* Same styles as .prev and .next but with smaller dimensions */
     cursor: pointer;
@@ -163,7 +161,7 @@ footer a:hover {
   }
   
   .thumb-slider .thumbs img {
-    width: 75px;
+    width: 35px;
   }
 
 footer {
@@ -228,11 +226,23 @@ footer {
         }
     }
 
-    function jumpToSlide(n) {
-        slideIndex = n;
-        document.getElementById('slider-img').src = slideImages[slideIndex - 1];
-        updateThumbnails();
+        function jumpToSlide(n) {
+    slideIndex = n;
+    document.getElementById('slider-img').src = slideImages[slideIndex - 1];
+    updateThumbnails();
+    thumbSlideIndex = slideIndex - 1; // Update thumbSlideIndex
+    plusThumbSlides(0); // Call plusThumbSlides(0) to scroll to the selected thumbnail
+    
+    // Remove the current class from all thumbnails
+    var thumbImgs = document.querySelectorAll('.thumb-slider .thumbs img');
+    for (var i = 0; i < thumbImgs.length; i++) {
+        thumbImgs[i].classList.remove('current');
     }
+    
+    // Add the current class to the selected thumbnail
+    thumbImgs[thumbSlideIndex].classList.add('current');
+}
+
 
     function plusSlides(n) {
         slideIndex += n;
@@ -272,9 +282,9 @@ var hammer = new Hammer(sliderElement);
 hammer.on('swiperight', function() { plusSlides(-1); });
 hammer.on('swipeleft', function() { plusSlides(1); });
 </script>
-
     <footer>
     <p>© 2023 Ecaterina Timofti | SMS: <a href="sms:+4746388048">+47 463 88 048</a> | <a href="https://www.instagram.com/oslo_nails_caterina/" target="_blank">Instagram</a></p>
 	</footer>
-	
+	</body>
+</html>
 
